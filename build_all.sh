@@ -3,14 +3,13 @@ set -euo pipefail
 
 GREEN='\033[0;32m'
 RED='\033[0;31m'
-WHITE='\033[0;37m'
 RESET='\033[0m'
 
 aur_packages=("glow")
 image_name="arch_package_builder"
 
 function info(){
-  echo -e "${WHITE}> ${GREEN}$1${RESET}"
+  echo -e "> ${GREEN}$1${RESET}"
 }
 
 function rebuild_image(){
