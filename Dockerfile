@@ -5,5 +5,5 @@ RUN pacman -Syu --noconfirm && \
     echo 'builder ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 WORKDIR /home/builder
 USER builder
-COPY ./build.sh .
-ENTRYPOINT ./build.sh
+COPY ./build.sh /build.sh
+ENTRYPOINT /build.sh
