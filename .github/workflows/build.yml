@@ -18,6 +18,8 @@ jobs:
       - run: pacman -Sy --noconfirm git
       - name: Checkout aur package
         run: git clone https://aur.archlinux.org/${{ matrix.package }}.git /mnt/package
+      - name: add builder and chown
+        run: useradd builder && chown builder:builder /mnt/package
       - name: Make Package
-        run: cd /mnt/package && makepkg -sic 
+        run: su builder && cd /mnt/package && makepkg -sic 
       - run: ls -la /mnt/package
