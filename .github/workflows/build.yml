@@ -19,4 +19,4 @@ jobs:
         with:
           aur: true
 
-      - run: ls -la $GITHUB_WORKSPACE
+      - run: ls -la
