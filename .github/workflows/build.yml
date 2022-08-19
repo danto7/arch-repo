@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout aur package
-        run: "git clone https://aur.archlinux.org/${{ matrix.package }}.git"
+        run: git clone https://aur.archlinux.org/${{ matrix.package }}.git
 
       - name: Validate package
         uses: hapakaien/archlinux-package-action@v2
