@@ -16,5 +16,3 @@ jobs:
 
       - name: Validate package
         uses: hapakaien/archlinux-package-action@v2
-        with:
-          path: ${{ matrix.package }}
