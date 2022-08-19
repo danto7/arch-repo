@@ -18,3 +18,5 @@ jobs:
         uses: hapakaien/archlinux-package-action@v2
         with:
           aur: true
+
+      - run: ls -la $GITHUB_WORKSPACE
