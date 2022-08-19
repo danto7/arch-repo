@@ -19,6 +19,7 @@ jobs:
       volumes:
         - /mnt:/mnt
     steps:
+      - run: pacman -Sy git
       - name: Checkout aur package
         run: git clone https://aur.archlinux.org/${{ matrix.package }}.git /mnt
       - name: Make Package
