@@ -21,5 +21,5 @@ jobs:
       - name: add builder and chown
         run: useradd builder && chown builder:builder /mnt/package
       - name: Make Package
-        run: su builder -c "cd /mnt/package && makepkg -sic"
+        run: su builder -c "cd /mnt/package && makepkg -sfc"
       - run: ls -la /mnt/package
