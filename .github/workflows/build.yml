@@ -14,12 +14,16 @@ jobs:
       image: archlinux:base-devel
       volumes:
         - /mnt:/mnt
+    env:
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      DESTINATION_SERVER: ${{ secrets.DESTINATION_SERVER }}
     steps:
       - run: pacman -Sy --noconfirm git unzip
       - name: Checkout aur package
         run: git clone https://aur.archlinux.org/${{ matrix.package }}.git /mnt/package
       - name: add builder and chown
-        run: useradd builder && chown builder:builder /mnt/package
+        run: useradd builder && chown -R builder:builder /mnt/package
       - name: Make Package
         run: su builder -c "cd /mnt/package && makepkg -sfc"
-      - run: ls -la /mnt/package
+      - run: echo "$SSH_PRIVATE_KEY" > id_rsa
+      - run: scp -i id_rsa *.pkg.tar.zst "$DESTINATION_SERVER":/www/
