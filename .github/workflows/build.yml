@@ -18,13 +18,13 @@ jobs:
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       DESTINATION_SERVER: ${{ secrets.DESTINATION_SERVER }}
     steps:
-      - run: pacman -Sy --noconfirm git unzip openssh
+      - run: pacman -Sy --noconfirm git openssh
       - name: Checkout aur package
         run: git clone https://aur.archlinux.org/${{ matrix.package }}.git /mnt/package
       - run: whoami
       - name: add builder and chown
         run: 'useradd builder && chown -R builder:builder /mnt/package && echo "builder ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers'
       - name: Make Package
-        run: su builder -c "cd /mnt/package && makepkg -sfc"
+        run: su builder -c "cd /mnt/package && makepkg -sfc --noconfirm"
       - run: echo "$SSH_PRIVATE_KEY" > id_rsa && chmod 600 id_rsa
       - run: scp -i id_rsa -o StrictHostKeyChecking=no /mnt/package/*.pkg.tar.zst "$DESTINATION_SERVER":/www/
