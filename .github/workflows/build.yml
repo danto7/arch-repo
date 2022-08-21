@@ -21,6 +21,7 @@ jobs:
       - run: pacman -Sy --noconfirm git unzip openssh
       - name: Checkout aur package
         run: git clone https://aur.archlinux.org/${{ matrix.package }}.git /mnt/package
+      - run: whoami
       - name: add builder and chown
         run: useradd builder && chown -R builder:builder /mnt/package
       - name: Make Package
