@@ -18,7 +18,7 @@ jobs:
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       DESTINATION_SERVER: ${{ secrets.DESTINATION_SERVER }}
     steps:
-      - run: pacman -Sy --noconfirm git unzip
+      - run: pacman -Sy --noconfirm git unzip scponly
       - name: Checkout aur package
         run: git clone https://aur.archlinux.org/${{ matrix.package }}.git /mnt/package
       - name: add builder and chown
