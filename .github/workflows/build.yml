@@ -23,7 +23,7 @@ jobs:
         run: git clone https://aur.archlinux.org/${{ matrix.package }}.git /mnt/package
       - run: whoami
       - name: add builder and chown
-        run: useradd builder && chown -R builder:builder /mnt/package
+        run: 'useradd builder && chown -R builder:builder /mnt/package && echo "builder ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers'
       - name: Make Package
         run: su builder -c "cd /mnt/package && makepkg -sfc"
       - run: echo "$SSH_PRIVATE_KEY" > id_rsa && chmod 600 id_rsa
